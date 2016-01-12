@@ -1,0 +1,107 @@
+<html>
+<head>
+<title> Drag And Drop </title>
+<script src="Scripts/processing.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+
+int bx;
+int by;
+
+int rx;
+int ry;
+
+boolean inImage1;
+boolean inImage2;
+
+int bdifx = 20; 
+int bdify = 20; 
+int rdifx = 20; 
+int rdify = 20; 
+
+int mDxb;
+int mDyb;
+int mDxr;
+int mDyr;
+
+
+void setup(){
+
+size(500,500);
+frameRate( 30 );
+
+bx = 100;
+by = 100;
+
+rx = 70;
+ry = 70;
+
+}
+
+
+void draw()
+{
+	background(0,0,0);
+	
+	fill(0,255,0);
+	rect(bx,by,bdifx,bdify);
+	fill(255,0,0);
+	rect(rx,ry,rdifx,rdify);
+	
+	if(mouseX > bx && mouseX < bx + bdifx && mouseY > by && mouseY < by + bdify)
+	{
+		inImage1 = true;
+	}	
+		
+	if(mousePressed == true && mouseButton == LEFT && inImage1 == true) 
+	{
+		mDxb = mouseX - bx;
+		mDyb = mouseY - by;
+		
+	}else{
+		inImage1 = false;
+	}
+
+	if(mouseX > rx && mouseX < rx + rdifx && mouseY > ry && mouseY < ry + rdify)
+	{
+		inImage2 = true;
+	}	
+		
+	if(mousePressed == true && mouseButton == LEFT && inImage2 == true) 
+	{
+		mDxr = mouseX - rx;
+		mDyr = mouseY - ry;
+		
+	}else{
+		inImage2 = false;
+	}	
+	
+		
+}
+
+void mouseDragged()
+{
+	if(inImage1 == true)
+	{
+		bx = mouseX - mDxb;
+		by = mouseY - mDyb;
+	}
+	
+	if(inImage2 == true)
+	{
+		rx = mouseX - mDxr;
+		ry = mouseY - mDyr;
+	}
+}
+
+
+
+
+
+</script>
+<canvas id="mycanvas"></canvas>
+</head>
+
+<body>
+
+</body>
+</html>
